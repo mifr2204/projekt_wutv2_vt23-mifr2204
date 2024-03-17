@@ -2,7 +2,7 @@
 
 <?php
 include_once('includes/classes/User.class.php');
-include_once('includes/classes/Posts.class.php');
+include_once('includes/classes/Post.class.php');
 include_once('system/common.php');
 include_once('system/config.php');
 include('includes/header.php');
@@ -15,7 +15,7 @@ if(isset($_GET['id'])) {
     header("location: ./index.php");
 }
 
-$posts = new Posts();
+$post = Post::getUnique($id);
 ?>
 <?php
 
@@ -25,6 +25,17 @@ $posts = new Posts();
             $title = $_POST['title'];
             $content = $_POST['content'];
     
+            try {
+                $post = Post::newPost($newPostArgs);
+                $message = "<div class='status'>✔️ Sidan är skapad</div>";
+                ?>
+                <a href="./create.php">Skapa Nytt inlägg</a>
+                <?php
+            } catch (Exception $e) {
+                $message = "<div class= 'alert'>Sidan kunde ej skapas</div>";
+            }
+        
+
             if($posts->changePost($id, $title, $content)) {
                 $message = "<div class='status'>✔️ Inlägget är uppdaterat</div>";
                 ?>

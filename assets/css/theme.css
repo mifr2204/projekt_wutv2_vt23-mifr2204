@@ -1,20 +1,27 @@
+/*font and text-general*/
+h1 { /*FIX ME SKAPA HAMB MENY*/
+    text-align: center;
+    position: absolute;
+    top: 10%;
+    right: 20%;
+    left: 20%;
+    background-color:rgba(255, 255, 255, 0.7);
+    font-size: 60px;
+    padding: 20px;
 
-* {
-    box-sizing: border-box;
+}
+/*top section and header*/
+#classcont{
+    position: relative;
+    text-align: center;
+}
+#topimg {
+    width: 100%;
 }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    color: rgba(0,0,0,.8);
-}
 
-h1, h2, h3, h4, h5, h6 {
-    margin: 0;
-}
-
-/*Buttons*/
-input[type=button], input[type=submit], button, .button {
+/*Buttons and messages-general*/
+input[type=button], input[type=submit], button, .button, .readMoreButton {
     text-transform: uppercase;
     color: rgba(0,0,0,.8);
     text-decoration: none;
@@ -24,6 +31,17 @@ input[type=button], input[type=submit], button, .button {
     background: transparent;
     border: none;
     border-radius: 3px;
+  
+}
+.readMoreButton{
+    float: right;
+    
+    margin-top: auto;
+    border-top: solid black 2px;
+    border-bottom: solid black 2px;
+}
+#createlink, #editlink, #deletelink, #alllink, .userlist {
+    display: none;
 }
 
 .alert{
@@ -43,16 +61,121 @@ input[type=button], input[type=submit], button, .button {
     margin-left: 3px;
 }
 
-#createlink, #editlink, #deletelink, #alllink {
+/*Body*/
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    color:black;
+    max-width: 1800px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(222, 222, 222, 0.82);
+
+}
+
+/*Body-mid*/
+.mid  {
+    display: flex;
+    max-width: 1600px;    
+}
+section.mid > .container {
+    width: 100%;
+    display: flex;
+    max-width: 1600px;
+    flex-wrap: wrap;
+}
+
+/*Body-Mid-nav*/
+
+nav.sidebar {
+    min-width: 200px;
+    border-right: 2px solid black;
+    margin: 10px 10px 10px 10px; 
+    padding: 1em;
+    
+}
+#loginbtn, #logoutbtn{
+    margin-bottom: 60px;
+}
+
+nav.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+}
+.mainmen {
+    display: block;
+    padding: .8em;
+    text-transform: uppercase;
+    border: 1px solid black;
+    margin-bottom: 1em;
+    text-decoration: none;
+    font-weight: 700;
+    color: black;
+    background-color: aquamarine;
+    
+}
+#blogglink, #userlistbtn {
+    display: block;
+    padding: .8em;
+    text-transform: uppercase;
+    border: 1px solid black;
+    margin-bottom: 1em;
+    text-decoration: none;
+    font-weight: 700;
+    color: black;
+    background-color:aqua;
+}
+.submenu {
     display: none;
+    padding: .8em;
+    text-transform: uppercase;
+    border-bottom: 1px solid grey;
+    text-align: center;
+    padding-top: 1.0rem;
+    text-decoration: none;
+    font-weight: 700;
+    color: black;
+
 }
 
-input[type=button].primary, input[type=submit].primary, button.primary, .button.primary {
-    background: #2980b9;
-    color: #ffffff;
+/*Body-Mid-article*/
+.mid article {
+    margin: 20px 20px 20px 20px;
+    background-color:rgba(255, 255, 255, 0.7);
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 40px;
+    overflow-wrap: break-word;
+}
+/*FIXME så artiklarna inte tar mer än de ska */
+article h2 { /*FIX ME SKAPA HAMB MENY*/
+    text-align: center;
+    font-size: 30px;
+    padding: 20px;
+    text-decoration: underline;
+    margin-top: 0; 
+}
+.by{
+    display: flex;
+    border-bottom: solid grey 2px;
+}
+.crebyp{
+    margin: 0;
+    margin-top: 40px;
+}
+.mid h2 {
+    text-align: center;
 }
 
-/*textboxes*/
+/*Body-Mid-login*/
+#loginmain .container {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 70px;
+}
 input[type=text], input[type=password], input[type=email], .input, textarea {
     display: block;
     width: 100%;
@@ -63,15 +186,43 @@ input[type=text], input[type=password], input[type=email], .input, textarea {
     border-radius: 3px;
 }
 
-/*Form*/
-.form-field > * {
-    display: block;
-}
-
 form .form-field {
     margin-bottom: 1em;
 }
-/*status message*/
+/*footer*/
+section.bottom {
+    text-align: center;
+    margin-top: 2em;
+    border-top: 2px solid black;
+    padding-top: 2em;
+}
+/*table*/
+
+.table {
+    width: 100%;
+}
+
+.table, .table tbody {
+    width: 100%;
+}
+
+.table th {
+    
+    min-width: 100px;
+}
+
+.table td {
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    padding: .6em;
+    font-size: 14px;
+}
+
+/*textboxes
+
+
+/*Form
+
+/*status message
 .status {
     padding: 1em;
     background: rgba(0,0,0,.1);
@@ -85,25 +236,21 @@ form .form-field {
     background: rgb(163, 5, 5);
     color: #ffffff;
 }
-/*table*/
-.table {
-    width: 100%;
-}
 
-.table, .table tbody {
-    width: 100%;
-}
 
-.table th {
-    text-align: left;
-}
 
-.table td {
-    border-bottom: 1px solid rgba(0,0,0,.1);
-    padding: .6em;
-    font-size: 14px;
-}
-/*bredcrumbs*/
+message box
+
+
+
+
+
+
+
+/*index*/
+
+/*
+
 nav.breadcrumbs ul {
     list-style: none;
 }
@@ -122,7 +269,37 @@ nav.breadcrumbs ul li:first-child > *::before {
     padding: 0;
 }
 
-/*message box*/
+* {
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+
+input[type=button].primary, input[type=submit].primary, button.primary, .button.primary {
+    background: #2980b9;
+    color: #ffffff;
+}
+
+section.document {
+    flex: 1;
+}
+
+.container {
+    width: 1200px;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+section.top {
+    border-bottom: 2px solid black;
+}
+
+section.mid {
+    margin-top: 3em;
+}
 .modal {
     padding: 2em;
     border: 1px solid rgba(0,0,0,.4);
@@ -144,67 +321,21 @@ section.divider {
     border-top: 2px solid rgba(0,0,0,.8);
 }
 
-/*
-    Posts
-*/
 
-.container {
-    width: 1200px;
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-}
 
-section.top {
-    border-bottom: 2px solid black;
-}
-
-section.mid {
-    margin-top: 3em;
-}
-
-section.mid > .container {
-    display: flex;
-}
-
-section.document {
-    flex: 1;
-}
 
 section.document article {
     border: 1px solid #000000;
     padding: 2em;
     margin-bottom: 1em;
 }
-/*sidebar*/
-nav.sidebar {
-    width: 300px;
-    border: 2px solid black;
-    margin-right: 3em;
-    padding: 1em;
-}
+/*
+    Posts
+*/
 
-nav.sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
 
-nav.sidebar ul li a {
-    display: block;
-    padding: .8em;
-    text-transform: uppercase;
-    border: 1px solid black;
-    margin-bottom: 1em;
-    text-decoration: none;
-    font-weight: 700;
-    color: black;
-}
+*/
 
-/*footer*/
-section.bottom {
-    text-align: center;
-    margin-top: 2em;
-    border-top: 2px solid black;
-    padding-top: 2em;
-}
+
+
+

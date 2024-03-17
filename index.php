@@ -1,53 +1,44 @@
 <?php
 include_once('system/common.php');
+include_once('includes/classes/Post.class.php');
+
 include('includes/header.php');
-include('includes/sidemenu.php');
-include_once('includes/classes/Posts.class.php');
-
-$posts = new Posts();
-$post = $posts->latestPost();
-//$userid = $post['username'];
 
 
-foreach($post as $item) {
-    ?>
-    <article>
-    <h3><?= $item['title']; ?></h3>
-    <p>________________________ </p>
-    <p>Skapad <?= $item['created']; ?> </p>
-    <div class="by">
-    <p>Av</p>
-    <p class="username"> <?= $item['username'];?></p>
-    <p class="underscore">________________________ </p>
-    <h4><?= $item['content']; ?></h4>
-   
-    <a href="./posts.php?id=<?= $item['id']; ?>">Läs mer</a>
-    
-    </article>
-    
-    <?php
-}
 
-$users = new User();
-$user = $users->allUsers();
+$posts = Post::allPostsWithLimit(5); //skapar en instans av posts med alla posts GG
+//FIX ME  fixa så blogginläggen sorteras eller hamnar på flera sidor, ev visa hela och ta bort visa mer? visa smakprover?  
 ?>
-<div class="userlist">
-    <ul>
-<?php
-foreach($user as $item) {
-    ?>
-    <li> <a href="./userpost.php?id=<?= $item['id']; ?>"><?= $item['username']; ?></a></li>
-   
-    
-    <?php
-}
-?>
+    <h1>Blogginlägg</h1>
 
-    </ul>
 </div>
-<?php
-//navcont och last ska vara lika typ
+    </section>
 
+<main >
+    
+    <?php
+    include('includes/sidemenu.php');
+    foreach($posts as $post) {
+    ?>
+        <article>
+
+        <h2><?= $post->title; ?></h2>
+
+        <p class="crebyp">Skapad <?= $post->created; ?> </p>
+        <div class="by">
+            <p>Av:: </p>
+            <p class="username"> <?= $post->getUser()->username;?> </p>
+        </div>
+ 
+        <p><?= $post->content; ?></p>
+        </article>
+    <?php
+    }
+
+?>
+
+</main>
+<?php
 
 include('includes/footer.php');
 ?>

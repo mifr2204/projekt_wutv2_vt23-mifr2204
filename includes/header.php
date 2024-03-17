@@ -19,10 +19,7 @@ $config = include_once('./system/config.php');
 <body>
     
     <section class="top">
-        <div class="container">
-            <a href="/">
-                <h1><img src="./assets/img/logo.png" alt="Mickans Smådjur" /></h1>
-            </a>
-        </div>
-    </section>
-
+        <div  id="classcont" class="container">
+            
+            <img id="topimg" src="./assets/img/blog.jpeg" alt="blog image" />
+            

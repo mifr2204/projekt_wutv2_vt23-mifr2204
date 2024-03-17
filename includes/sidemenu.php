@@ -1,18 +1,35 @@
 <?php 
-    include_once('includes/classes/Posts.class.php');
     include_once('system/config.php');
-    
+    include_once('includes\classes\User.class.php');
 ?>
 
 <section class="mid">
-        <div class="container">
-            <nav class="sidebar">
-                <ul>
-                    <li>
-                        <a href="./index.php">Startsidan</a>
-                    </li>
+        
+        <nav class="sidebar">
+            
+            <ul>
+                <li>
+                    <a class="mainmen" href="./index.php">Startsidan</a>
+                </li>
+                
 <?php
-
+//if loged in returns other navs
+if(isset($_SESSION['username'])) {
+    ?>
+        <li>
+            <a class="mainmen" id="logoutbtn" href="./logout.php">Logga ut</a>
+        </li>
+    <?php
+    } else
+    {
+    ?>
+        <li>
+            <a class="mainmen" id="loginbtn" href="./login.php" >Logga in</a>      
+        </li>
+         
+    <?php
+    }
+    
     if(isset($_SESSION['username'])) { 
         ?>
             <li>
@@ -31,25 +48,29 @@
     }
     
 
-//if loged in returns other navs
-if(isset($_SESSION['username'])) {
+ //FIX me ta bort logga in på sidemeny när inloggad, lägg till logga ut 
 ?>
-    <li>
-        <a href="./logout.php">Logga ut</a>
-    </li>
+        </ul>
 <?php
-} else
-{
-?>
-    <li>
-        <a href="./login.php" >Logga in</a>      
-    </li>
-        
-<?php
-} //FIX me ta bort logga in på sidemeny när inloggad, lägg till logga ut 
-?>
-                </ul>
+        $users = User::allUsers();//skapar en instans av user med alla users GG
+    ?>
+    <div class="users">
+        <ul>
+        <li>
+            <a href="#" id="userlistbtn" >Andvändare &dArr;</a>
+        </li>
+    <?php
+        foreach($users as $user) {
+            $numerOfPosts = Post::countPostsByUserId($user->id);
+    ?>
+            <li><a class="submenu" class="button" class="userlist" href="./userpost.php?userid=<?= $user->id; ?>"><?= $user->username; ?> (<?= $numerOfPosts; ?>)</a></li>   
+    <?php
+        }
+    ?>
+        </ul>
+    </div>
             </nav>
+        <div class="container">
 
 <script type="text/javascript" src="assets/js/js.js"></script>
 

@@ -2,20 +2,20 @@
 include_once('system/common.php');
 include('includes/header.php');
 include('includes/sidemenu.php');
-include_once('includes/classes/Posts.class.php');
+include_once('includes/classes/Post.class.php');
+include_once('includes/classes/User.class.php');
 
-$userid = $_SESSION;
-$posts = new Posts();
 
 if(isset($_POST['checkboxn'])) {
     foreach($_POST['checkboxn'] as $id)
     {
-        $delp = $posts->delPost($id);
+        $post = Post::getUnique($id);
+        $post->delete();
     }
 }
 
-
-$post = $posts->userPost($userid);
+$user = User::getLoggedInUser();
+$posts = $user->getPosts();
 
 
 
@@ -30,19 +30,19 @@ if(isset($message)) {
     <ul>
     
     <?php
-foreach($post as $item) {
+foreach($posts as $post) {
     ?>
-    <input type="hidden" name="id[]" value="<?=$item['id']?>">
-    <input type="checkbox" name="checkboxn[]" id="<?=$item['id']?>" value="<?=$item['id']?>">
+    <input type="hidden" name="id[]" value="<?=$post->id?>">
+    <input type="checkbox" name="checkboxn[]" id="<?=$post->id?>" value="<?=$post->id?>">
     <li>
-    <h3><?= $item['title']; ?></h3>
+    <h3><?= $post->title; ?></h3>
     <p>________________________ </p>
-    <p>Skapad <?= $item['created']; ?> </p>
+    <p>Skapad <?= $post->created; ?> </p>
     <div class="by">
     <p>Av</p>
-    <p class="username"> <?= $item['username'] ?></p>
+    <p class="username"> <?= $user->username; ?></p>
     <p class="underscore">________________________ </p>
-    <h4><?= $item['content']; ?></h4>
+    <h4><?= $post->content; ?></h4>
     </li>
     </ul>
     <?php

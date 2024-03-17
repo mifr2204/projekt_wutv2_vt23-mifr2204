@@ -14,21 +14,21 @@ $showform = true;
 $displaybutton = false;
 
 if(isset($_POST['email'])) {
-    $forname = $_POST['forname'];
-    $lastname = $_POST['lastname'];
-    $email = $_POST['email'];
-    $username = $_POST['username'];
-    $password = $_POST['password'];
- 
-    $user = new User();
+    $newUserArgs = array('forname' => $_POST['forname'], 'lastname' => $_POST['lastname'], 'email' => $_POST['email'], 'username' => $_POST['username'], 'password' => $_POST['password']);
 
-    if($user->newUser($forname, $lastname, $email, $username, $password)) {
-        $showform = false;
-        $message = "<div class='status'>✔️ Andvändaren är skapad</div>";
-        $displaybutton = true;
-    } else{
-        $message = "<div class='alert'>Användaren kunde inte skapas</div>";
-    } 
+    if ($_POST['password'] != $_POST['password2']) {
+        $message = '<div class="alert">Lösenord och bekräftat lösenord stämmer inte överens.</div>';
+    } else {
+        try {
+            $user = User::newUser($newUserArgs);
+            $showform = false;
+            $message = "<div class='status'>✔️ Andvändaren är skapad</div>";
+            $displaybutton = true;
+        } catch (Exception $e) {
+            $message = '<div class="alert">' . $e->getMessage() . '</div>';
+        }
+    }
+
 }
 
 
@@ -58,7 +58,7 @@ if ($showform) {
     <input type="password" name="password" id="password" />
 </div>
 <div class="form-field">
-    <label for="password2">Lösenord</label>
+    <label for="password2">Bekräfta lösenord</label>
     <input type="password" name="password2" id="password2" />
 </div>
 <div class="form-field">

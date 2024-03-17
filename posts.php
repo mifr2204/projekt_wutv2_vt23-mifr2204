@@ -1,5 +1,5 @@
 <?php
-include_once('includes/classes/Posts.class.php');
+include_once('includes/classes/Post.class.php');
 include_once('system/common.php');
 include('includes/header.php');
 include('includes/sidemenu.php');
@@ -11,13 +11,12 @@ if(isset($_GET['id'])) {
     header("location: ./index.php");
 }
 
-$posts = new Posts();
-$post = $posts->getPost($id);
+$post = Post::getUnique($id);
 
 
 ?>
-<h3><?= $post['title']; ?><h3>
-<?= $post['content']; ?>
+<h3><?= $post->title; ?><h3>
+<?= $post->content; ?>
 
 <div id="id">
 <?= $id; ?>
